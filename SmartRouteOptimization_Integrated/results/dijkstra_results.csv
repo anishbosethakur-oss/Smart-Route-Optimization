@@ -1,0 +1,2 @@
+Source,Destination,Path,Total Delay (ms),Throughput (Mbps),Packet Loss (%)
+R1,R5,R1 -> R2 -> R4 -> R5,39.25,80,0

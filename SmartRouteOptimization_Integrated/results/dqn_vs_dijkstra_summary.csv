@@ -1,0 +1,4 @@
+method,success_rate,mean_delay,mean_reward
+Adaptive Dijkstra,1.0,37.059636999999995,5.822035
+DQN,1.0,37.536934,5.8363059999999995
+Static Dijkstra,1.0,37.059636999999995,5.822035

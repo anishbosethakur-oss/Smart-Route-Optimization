@@ -1,0 +1,38 @@
+Six-Router Project Update — Test Notes
+========================================
+
+Topology
+- Six routers: R1-R6.
+- Added R2-R6 (base delay 12 ms, bandwidth 70 Mbps) and R6-R5 (base delay 8 ms, bandwidth 80 Mbps).
+- DQN state size: 28; action size: 6.
+
+Validation performed
+- Integration test: PASSED.
+- DQN test run: 30/30 successful routes; mean successful delay 37.69 (simulated ms).
+- Paired comparison: 100 traffic seeds per method.
+  DQN: success 100.0%, mean successful delay 37.54 ms, mean reward 5.84.
+  Static Dijkstra: success 100.0%, mean successful delay 37.06 ms, mean reward 5.82.
+  Adaptive Dijkstra: success 100.0%, mean successful delay 37.06 ms, mean reward 5.82.
+
+Interpretation
+In this run DQN was about 1.29% slower than Dijkstra on mean delay:
+(37.54 - 37.06) / 37.06 * 100 ≈ 1.29%.
+So the current evidence does not support a claim that DQN is better. This is useful experimental feedback; improve training/reward/state and rerun before making such a claim.
+
+One-step DQN calculation example from a run
+- Immediate reward r = -2.255328
+- Discount factor gamma = 0.95
+- Current Q(s,a) = 5.274319
+- Maximum next Q = 7.471380
+- Target y = r + gamma * maxQ = -2.255328 + 0.95 * 7.471380 = 4.842483
+- TD error = target - current Q = -0.431836
+- Smooth-L1/Huber loss = 0.093241
+These values are from one actual run and may change if the model is retrained.
+
+Commands from project root
+python integration_test.py
+python member2_ai/train.py
+python member2_ai/test_agent.py
+python member2_ai/compare_routing.py
+python member2_ai/reinforcement_calculation.py
+python code/network.py
